@@ -1,4 +1,4 @@
-import sys, logging, json, open_color, arcade
+import sys, logging, json, open_color, arcade, os
 
 #check to make sure we are running the right version of Python
 version = (3,7)
@@ -34,7 +34,7 @@ class Bullet(arcade.Sprite):
 
 
 
-class Window(arcade.Window):
+class MyGame(arcade.Window):
 
     def __init__(self, width, height, title):
 
@@ -46,11 +46,20 @@ class Window(arcade.Window):
         self.set_mouse_visible(False)
 
         arcade.set_background_color(open_color.black)
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(file_path)
+        
+        self.spaceShip_list = arcade.SpriteList()
+
 
 
 
     def setup(self):
-        pass 
+        self.spaceShip_sprite = arcade.Sprite("assets/spaceshooter/PNG/playerShip1_blue.png", 0.5)
+        self.spaceShip_sprite.center_x = 400
+        self.spaceShip_sprite.center_y = 300
+        self.spaceShip_list.append(self.spaceShip_sprite)
+
 
     def update(self, delta_time):
         pass
@@ -58,6 +67,7 @@ class Window(arcade.Window):
     def on_draw(self):
         """ Called whenever we need to draw the window. """
         arcade.start_render()
+        self.spaceShip_list.draw()
 
 
 
@@ -95,7 +105,7 @@ class Window(arcade.Window):
 
 
 def main():
-    window = Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    Window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     arcade.run()
 
 
