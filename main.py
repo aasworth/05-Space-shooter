@@ -18,7 +18,7 @@ BULLET_DAMAGE = 10
 ENEMY_HP = 50
 HIT_SCORE = 1
 KILL_SCORE = 10
-
+MOVEMENT_SPEED = 5
 
 class Bullet(arcade.Sprite):
     def __init__(self,position,velocity,damage):
@@ -52,6 +52,7 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
+
         
 
         # Make the mouse disappear when it is over the window.
@@ -114,6 +115,7 @@ class MyGame(arcade.Window):
     def on_mouse_motion(self, x, y, dx, dy):
         """ Called to update our objects. Happens approximately 60 times per second."""
         self.player.center_x = x
+        
 
     def on_mouse_press(self, x, y, button, modifiers):
         """
@@ -125,7 +127,8 @@ class MyGame(arcade.Window):
             bullet = Bullet((x,y),(0,10), BULLET_DAMAGE)
             self.bullet_list.append(bullet)
 
-    def on_key_press(self, x, y, button, modifiers):
+           
+
         
 
 
